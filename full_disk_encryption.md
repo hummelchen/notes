@@ -176,8 +176,8 @@ C `/dev/mapper/rootfs` далее можно работать как с обыч
 Кладём в initrd ключ и заголовок тома
 
 
-        cp /root/key /mnt/rootfs/initrd/etc/key
-        cp /root/header.luks /mnt/rootfs/initrd/header.luks
+        cp /root/key /mnt/rootfs/tmp/newinitrd/etc/key
+        cp /root/header.luks /mnt/rootfs/tmp/newinitrd/etc/header.luks
 
 
 Собираем получившийся initrd и кладём его в папку /root
