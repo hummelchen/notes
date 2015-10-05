@@ -1,0 +1,12 @@
+/etc/init.d/pptpd restart
+/etc/pptpd
+localip IP
+remoteip 1.2.3.4-10
+/etc/ppp/pptpd-options
+auth - авторизация клиентов
+	протоколы аутентификации
+proxyarp - проксирование arp-пакетов
+nodefaultroute
+/etc/ppp/chap-secrets
+user server   password IP-addresses
+me   pptd	   123      *

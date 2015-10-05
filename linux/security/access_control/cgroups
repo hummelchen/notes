@@ -1,0 +1,79 @@
+Первые принципы распределения ресурсов, gold, silver, iron user
+Сейчас принципы управления ресурсами сложнее, ориентированность на процессы
+С 2.6.6 - CFQ, completely fair queue - для процессора
+2.6.24 - CFS, completely fail scheduler - для диска
+Неплохо для desktop-a, но не для сервера 
+Ядро старается обеспечить максимальную равномерность распределения ресурсов между процессами, однако, это не всегда лучшая стратегия
+Ранее для ограничения групп процессов использовался chroot(только фс), jail(позволяет лимитировать ресурсы), системы виртуализации: xen, kvm (нельзя гибко изменить доступные ресурсы), ulimit - сложное и примитивное решение для ограничения ресурсы
+openvz, lxc - виртуальные машины, использующие ядро основной системы
+cgroup - способ ограничивать процессы и собирать их в группы, оперируем процессами и их группами, а не пользователями и т.п. 
+double fork, init, escape
+cgroup - псевдо fs
+Гранулярность вплоть до thread-а, можно поместить его в отдельную группу
+Отдельными подсистемами вводятся ограничения
+Процесс потомок автоматически включается в группу родителя
+Интерфейс:
+1. mount -t cgroup none /cgroup -o subsystem
+2.mkdir /cgroup/group01
+Attaching
+3. echo <pid> > /cgroup/group01/tasks
+4. rmdir /cgroup/group01
+rmdir попатчен, rm -rf не сработает
+Можно сделать дерево, с пробросом привелегий
+Аккаунтятся только новые ресурсы
+подсистемы
+    mount -t cgroup none /cgroup -o cpu
+    Изоляция и подсчёт ресурсов: cpuset, freezer, device, cpuacct, resource_counter
+    Управление ресурсами: cpu(scheduler), memory, disk i/o, net_cls, net_prio
+    Пример подключения:
+        mount -t cgroup none /cpu -o cpu
+        mount -t cgroup none /memory -o memory
+        mount -t cgroup none /xxx -o cpu,memory
+    Интерфейс в /proc: /proc/cgroups
+    /proc/pid/cgroups
+    cpuset - соответствие группы процессов и группы процессоров, хорошие и плохие кэши процессора, учитывать в 
+        NUMA - в системе из отдельных компьютеров, снижение хождений к "соседям", есть некоторое расстояние до банков памяти (кластер, сборка на хардварном уровне)
+    freezer(в виде RFC разрабатывается модуль для дампа в файл ) - 
+        mount -t cgroup none /freezer -o freezer
+        put task in /freezer/tasks
+        echo FROZEN > /freezer/freezer.state
+        echo RUNNING > /freezer/freezer.state
+        как SIGCONT для группы процессов
+    device - ограничение доступа к отдельным блочным и символьным устройствам из cgroup: allow/deny read/write/mknod
+        echo [b|c] MAJOR MINOR r/w/m > devices.allow
+        cat devices.list
+    blkio - разграничение доступа к диску по производительности. CFQ, IO throttling - верхний предел скорости работы (как IO nice(не работает :-)))
+        борьба за важные ресурсы порождает проблемы с производительностью, с помощью cgroup можно выделять ресурсы по потребности
+    net_cls - простой способ маркировать трафик
+        например torrents vs firefox, firefox в cgroup, настройка трафик-шейпера, можно сделать с помощью mangle с большим overhead-ом, у cgrop маленький
+        echo 0x100001 > /cgroup/net_cls/red/net_cls.classid
+        cat /cgroup/net_cls/red/net_cls.classid
+        tc - для процессов
+    net_prio - приоритезация трафика по группам процессов
+        echo "eth0 5" > /cgroup/net_prio/iscsi/net_prio.ifpriomap
+    memory - отслеживание и ограничение использования памяти группой процессов, soft_limits(спец. уведомление), подробная статистика - rss, cache, maped, etc
+        Можно отдельно управлять памятью, которую использует ядро для этих процессов, память, выделяемая ядром
+        memory.state
+        memory.limit_in_bytes - вся память 
+        memory.soft_limit_in_bytes
+        memory.use_hierarchy_enabled
+        memory.oom_control
+        memory.kmem.limit_in_bytes - вся память 
+        memory.kmem.soft_limit_in_bytes
+        memory.kmem.tcp.limit_in_bytes - tcp-шные буфера
+        memory.kmem.tcp.usage_in_bytes
+Точное распределение памяти
+Ограничение по памяти не сильно портит производительность
+Обуздывание oom-killer-а, избавление от процессов, съедающих память, даже в новых ядрах. oom внутри cgroup
+Подъем из cgroup 30 секунд, можно настроить oom-killer там внутри
+libcgroup - отличная документация от RedHat, cgexec, cgclassify, есть pam, cgrulesengd
+    cgconfig.conf
+    cgrules.conf
+Сервис не должен убивать машину или системные приложения (crom, ssh, etc)(защита от oom)
+Необходим единый интерфейс, новые возможности
+systemd + cgroup  
+Если будет добавлен процесс, то его существующие потомки туда не попадут
+Ссылки:
+    clck.ru/8taxo - документация ядра
+    clck.ru/8tay8 - документация от RH
+    clck.ru/8tayS -  paas under the hood, cgroups

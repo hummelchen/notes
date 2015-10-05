@@ -1,0 +1,59 @@
+Подход к освоению сложных систем
+
+Любую задачу в ИТ можно решить, добавив ещё один уровень абстракции(перенаправления)
+
+(6) It is easier to move a problem around (for example,
+by moving the problem to a different part of the overall network
+architecture) than it is to solve it.
+(6a) (corollary). It is always possible to add another
+level of indirection.
+FC1925: The Twelve Networking Truths
+(1 April 1996)
+Fundamental theorem of software engineering
+We can solve any problem by introducing an extra level of indirection
+David John Wheeler FRS
+...except for the problem of too many layers of indirection
+Kevlin Henney
+Первый вывод - учи английский
+Подходы к изучению систем   
+    • Нисходящий (дедукция, анализ)
+    • Восходящий (индукция, синтез)
+Второй вывод:
+    Играйте с кубиками
+Psychologist K. Anders Ericsson at
+Berlin's elite Academy of Music
+• elite performers had each totaled 10,000 hours
+of practice
+• there were no "naturals", i.e. musicians who
+effortlessly reached the top while practicing a
+fraction of the time their peers did
+• there were no "grinds" either, i.e. people who
+worked very hard but didn't get to the top
+Одаренности не существует, нет успешных музыкантов, занимавшихся меньше, чем их коллеги
+Третий вывод - нет легких путей, нужна практика и книги
+Восходящий подход:
+    Gentoo
+    LFS
+        linuxfromscratch.org, распался на много проектов, есть книга
+        cross linux from scratch - кросскомпиляция
+        HLFS - с уклоном в инфобез
+    ArchLinux
+        нет инсталлятора
+    Мнимальная установка любой системы
+    Установка linux на странную железяку
+setterm
+ip link
+packstrap -i /mnt base
+genfstab -U -p /mnt
+arch-chroot /mnt bash
+Не было печали - апдейтов накачали
+packman -S grub
+yauort
+Slackware
+lvm-snapshot
+    в момент создания ничего не копируется, copy on write
+btrfs - из-за checksum при записи, нет fscheck
+3 sync
+sync - сброс буферов
+sync - сброс буферов с прошлого sync
+sync - паранойя

@@ -1,0 +1,5 @@
+rcs - бэкапы файлов
+ci -l file
+rlog file
+rcsdiff -r1.1 file
+co -l -r1.1 file

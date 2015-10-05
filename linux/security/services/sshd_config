@@ -1,0 +1,13 @@
+/etc/ssh/sshd_config
+Protocol 2
+AllowUsers user
+ClientAliveInterval 600 - через n секунд бездействия сессия сбросится
+ClientAliveCountMax 0 - запросы без ответа
+PermitRootLogin no
+HostbasedAutentication no - централизованная аутентификация
+IgnoreRhosts yes - запрет .rhosts
+PermitEmptyPasswords no
+Port 300 - порт, на котором работает ssh сервер
+ListenAddres address
+LoginGraceTime 1m - время для регистрации в системе
+MaxAuthTries 0 - одна попытка на подключение

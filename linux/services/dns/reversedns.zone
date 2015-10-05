@@ -1,0 +1,10 @@
+ORIGIN 0.168.192.in-addr.arpa.
+@       SOA     c0.test.loc. root.c0.test.loc. 2013092200 1h 10m 1d 30
+        NS      c0.test.loc.
+254     PTR     c0.test.loc.
+1       PTR     blizzard.test.loc.
+2       PTR     typhoon.test.loc.
+2       PTR     hurricaine.test.loc.
+3       PTR     snowfall.test.loc.
+
+

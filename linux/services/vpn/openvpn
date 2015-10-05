@@ -1,0 +1,53 @@
+Шифрование по умолчанию - blowfish, библиотека - openssl
+tap - уровень два, ethernet, tun - уровень 3 маршрутизируемый point-to-point
+Аутентификация и шифрование, возможность работы туннеля через nat, сжатие трафика с lzo
+/usr/share/doc/openvpn/ - примеры конфигурационных файлов
+/usr/share/doc/openvpn/ - примеры конфигурационных файлов
+/etc/openvpn
+/var/run/openvpn
+/usr/lib/openvpn/ 
+/var/log/openvpn.log - можно завести отдельный лог-файл
+а так в messages
+https://stavrovski.net/blog/how-to-install-and-set-up-openvpn-in-debian-7-wheezy
+cp -prv /usr/share/doc/openvpn/examples/easy-rsa/2.0 /root/easy-rsa
+cd /root/easy-rsa
+cp vars{,.orig}
+source ./vars
+./clean-all
+Common Name (eg, your name or your server's hostname) [changeme]:server.local - должен соответствовать имени сервера
+./build-key-server  server.local
+./build-dh
+openvpn.conf
+    local - слушать входящие соединения, если не определена, то openvpn слушает на всех интерфейсах
+    port - официальный 1194
+    proto tcp (можно ещё udp)
+    dev tun (или tap), tun - маршрутизируемый ip-туннель, tap нужен для одной подсети
+    ca ca.crt - расположения файла сертификатов
+    cert server.local.crt - расположения файла сертификатов сервера
+    key - ключ
+    dh - файл диффи-хеллмана
+    sever - задаёт сеть, сервер получает 1 ip-адрес, клиенты - последущие
+    ifconfig-pool-persist - соответствие ip-адресов клиентам, сохраняется после перезагрузки
+    push - опции засылают команду на клиенте, при его подключении к vpn-серверу
+        задаём маршрут, DNS-сервер, redirect-gateway - опция назначает шлюз по умолчанию, удаление старых маршрутов, замена новым, весь трафик пойдет через openvpn
+    client-to-client - смогут видеть друг друга
+    keepalive 10 120 - раз в 10 секунд пинговать, 120 секунд молчания - разрыв соединения
+    comp-lzo - сжатие трафика
+    user - пользователь и группа
+    group 
+    persist-key - не пересчитывать файл ключей
+    persist-tun - не переоткрывать устройства 
+    status - опция позволяет задать файл по статусу vpn-соединений, лежит в /etc/vpn
+    log - расположение лог-файла, старый стирается при старте
+    log-append - не будет очищаться
+    verb - уровень журналирования лог-файлов, 3 по умолчанию
+    mute 10 - не более 10 сообщений одной категории
+echo '1' > /proc/sys/net/ipv4/ip_forward 
+vim /etc/sysctl.conf
+iptables -t nat -A POSTROUTING -s 10.10.10.0/24 -o eth0 -j MASQUERADE
+
+client
+    client - работать как клиент 
+    remove server port
+    resolv-retry infinite - постоянный резолв хостнейма
+    ns-cert-type - проверка сервера через резолв хостнейма

@@ -1,0 +1,26 @@
+/etc/passwd
+user:passwordpr:uid:gid:groups:/home/folder/:shell
+/etc/shadow
+user:hash:from0tolastchg:maxvaldays:noticechgdays:beforeblockdays:blockdays
+useradd 
+	-m : home folder 
+	-s (shell/path) shell 
+	-u (UID) 
+	-g(group) (username)
+id (username) информация о uid, gid и группах пользователя
+passwd (username) - установка пароля
+usermod - те же параметры как и в useradd, но модификация 
+	-L - заблокировать пользователя 
+	-U разблокировать пользователя
+userdel - удалить пользователя 
+	-f удалить силой 
+	-r вместе с домашним каталогом
+getent passwd user - информация о пользователе
+groupadd - добавить группу
+groupdel - удалить группу
+gpasswd 	
+	-a username groupname /etc/group
+w, who - кто в системе
+fuser 
+	-k(убрать всех использующих) 
+	-1 -v : verbose (file) - кто использует данный файл/устройство

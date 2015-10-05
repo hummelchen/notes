@@ -1,0 +1,21 @@
+man 5 postconf
+smtpd_banner =  string with variables - строка привествия
+biff yes|no - уведомление о почте
+append_dot_mydomain yes|no - добавлять .домен
+myshostname = host - имя сервера
+alias_maps = hash:/etc/aliases - дополнительные имена пользователям
+alias_database = hash:/etc/aliases -
+myorigin = /etc/mailname - если не указан домен
+mynetworks = 127.0.0.0/8 192.168.1.0/24 - сети, на которых не распространяется ограничения по отправке писем
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+home_mailbox = Maildir/ - папка с почтой для юзера
+virtual_mailbox_domains = /etc/postfix/vhosts - виртуальные домены
+virtual_mailbox_base = /home/vmail/ - папка для почты
+virtual_mailbox_maps = hash:/etc/postfix/vmaps - соответствие ящика и папки на сервере; hash, формат базы данных
+virtual_minimum_uid = 1000 - id обработчиков
+virtual_uid_maps = static:5000 - обработчик
+virtual_gid_maps = static:5000 - группа обработчика
+
+

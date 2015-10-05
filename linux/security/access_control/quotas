@@ -1,0 +1,18 @@
+quota квоты на количество файлов и инодов
+/etc/fstab - опции usrquota, grpquota
+quotacheck -cuj /quotas
+	-a проверка всех фс с квотами
+	-c файлы квот нужно создать
+	-v вербозность
+	-u проверка квот для пользователей
+	-g проверка квот для групп
+Назначение квот:
+edquota user
+	-g группа
+fs used_block soft_max_used_blocks hard_max_used_blocks used_inodes soft_max used_inodes hard_max_used_inodes
+soft - можно превысить в течение какого-то промежутка времени
+hard - обойти невозможно
+quotaon - включить квоты
+quotaoff - выключить квоты
+repquota -a показ квоты пользователей
+quota -g - квоты для групп

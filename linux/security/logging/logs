@@ -1,0 +1,16 @@
+/var/log/cron - факты выполнения периодических заданий
+debug - отладочная информация
+maillog - работа почтовой системы
+messages - от info до warn
+/var/log/cron - выполняемые задачи
+
+Security:
+/var/log/secure - команды sudo, аутентификации в системе
+/var/log/audit/audit.log - man audit.d
+/var/log/lastlog - последние успешные подключения пользователя в систему
+faillog -неудачные попытки входа в систему
+lastlog -u user
+/var/run/utmp - текущие подключения в систему
+/var/log/wtmp - все подключения в систему с момента создания файла
+secure - попытки получения root, sudo
+last - все заходы в систему

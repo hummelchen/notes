@@ -1,0 +1,2 @@
+/etc/exports
+directory(mount_options)

@@ -1,0 +1,4 @@
+destination ssh { file("/var/log/ssh.log"); };
+filter f_ssh { program("sshd"); };
+log { source(src); filter(f_ssh); destination(ssh); };
+подробнее в security

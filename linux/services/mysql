@@ -1,0 +1,67 @@
+Разработчик БД, архитектор БД
+Раньше данные хранились в простых текстовых файлах, сейчас так делать нельзя
+Данные в базе - двухмерный массив, 
+Structured Query Language - язык
+Типы данных приведены в книге, как и количество байт под них
+mysql -u root -p
+\s - статус, текущий пользователь, база, номер подключения, кодировки
+Подключаемся через unix socket
+SHOW DATABASES;
+DROP DATABASE name;
+CREATE DATABASE company;
+USE company;
+SHOW TABLES;
+
+CREATE TABLE users ( id INT(5) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(64), surname VARCHAR(64), age TINYINT(3), email VARCHAR(64), status VARCHAR(128)) DEFAULT CHARACTER SET UTF8;
+DESCRIBE users;
+
+INSERT INTO users VALUES('', 'Ivan', 'Petrov', '25', 'petrov@company.ru', 'work');
+
+SELECT * FROM users;
+SELECT * FROM users WHERE status='work';
+UPDATE users SET status='work' WHERE surname='Malevin';
+DELETE from users WHERE surname='Karpin';
+SELECT count(*) FROM users;
+
+После удаления и последующей вставки номер не смещается, но это не важно, так как id обязан быть просто уникальным
+Права и привелегии
+GRANT SELECT,INSERT,DELETE,UPDATE ON company.* TO 'admin'@'localhost' IDENTIFIED BY 'secret';
+Создаём пользователя admin, с паролем secret
+SHOW GRANTS FOR 'admin'@'localhost';
+В книге написано как убрать права у пользователя или полностью удалить его
+ls -ls /var/lib/mysql/
+ls -ls /var/lib/mysql/company/
+HELP
+SHOW PROCESSLIST;
+
+vim /etc/mysql/my.cnf
+ls /usr/share/doc/mysql-server-5.5/examples
+bind-address            = 127.0.0.1
+
+#
+Смена пароля
+service mysql stop
+mysqld_safe --skip-grant-tables &
+mysql //не спросит пароль
+UPDATE mysql.user SET Password=PASSWORD('newpass') WHERE user='root'
+FLUSH PRIVILEGES
+
+
+/etc/mysql/debian.cnf - логины и пароли дебиана
+
+Бэкап 
+mysqldump --opt -p company > /root/company.sql
+DROP DATABASE company;
+Создать базу, затем
+mysql -p company < company.sql 
+myisamchk /var/lib/mysql/company/ //исправление таблиц
+ -r //recover
+ -o //читаются подряд все строки и всё восстанавлиается, медленно, но надёжно
+
+
+
+##3
+create DATABASE drupal;
+GRANT CREATE,DROP,SELECT,INSERT,DELETE,UPDATE ON drupal.* TO 'drupal'@'localhost' IDENTIFIED BY 'secret';
+
+

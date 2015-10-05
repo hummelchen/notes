@@ -1,0 +1,38 @@
+modprobe - загрузить модуль, -r : выгрузить модуль, -l : список всех доступных модулей ядра
+modinfo - информация о модуле
+lsmod - загруженные модули ядра
+/etc/modules - модули, загружаемые при загрузке системы
+init - изменить уровень выполнения системы
+0 - выключение
+1 - single user mode
+2 - многопользовательский режим
+6 - перезагрузка
+runlevel - текущий уровень выполнения
+Сборка:
+apt-get source linux-image-3.2.0-4-amd64
+cd linux-3.2.65/
+make menuconfig
+sudo apt-get install ncurses-devel
+sudo apt-get install ncurses-dev
+make menuconfig
+make menuconfig
+man /usr/share/doc/kernel-package/README.gz
+sudo apt-get install kernel-package
+man /usr/share/doc/kernel-package/README.gz
+man /usr/share/doc/kernel-package/README.gz
+cd /tmp/
+cd /root/
+ls
+cp -r /usr/src/linux-3.2.65/ .
+ls
+cd linux-3.2.65/
+make menuconfig
+clear
+reset
+make menuconfig
+ls
+less .config
+make deb-pkg LOCALVERSION=-redux KDEB_PKGVERSION=1
+dpkg -i ../linux-image-3.2.65-redux_1_amd64.deb 
+dpkg -i ../linux-headers-3.2.65-redux_1_amd64.deb 
+dpkg -i ../linux-libc-dev_1_amd64.deb 

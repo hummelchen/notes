@@ -1,0 +1,6 @@
+cron 
+/etc/sarg/sarg.conf
+	charset UTF-8
+	language Russian_UTF-8
+	resolve_ip 
+/var/lib/sarg

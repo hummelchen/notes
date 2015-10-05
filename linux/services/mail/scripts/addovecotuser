@@ -1,0 +1,12 @@
+echo "$1" > /tmp/user
+user=`cat /tmp/user | cut -f1 -d "@"`
+domain=`cat /tmp/user | cut -f2 -d "@"`
+echo -n "$user@$domain" >> /etc/dovecot/users
+echo -n "::5000:5000::" >> /etc/dovecot/users
+echo -n "/home/vmail/" >> /etc/dovecot/users
+echo "$domain/:/bin/false" >> /etc/dovecot/users
+/usr/bin/maildirmake.dovecot /home/vmail/ 5000:5000 $domain/$user
+echo $1 $domain/$user/ >> /etc/postfix/vmaps
+postmap /etc/postfix/vmaps
+postfix reload
+

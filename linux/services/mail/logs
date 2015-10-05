@@ -1,0 +1,5 @@
+date host postfix/smtpd: ID: client=name[address]
+date host postfix/cleanup: ID: message-id=<datetimeUTC.ID@host_присвоивший_id>
+date host postfix/qmgr: ID: from=<adress>, size=SIZE, nrcpt=? (queue status)
+date host postfix/local: ID: to=<address>, relay=local|?, delay=time_user/time/time/time, dsn=?.?.?, status=sent|?
+date host postfix/qmgr: ID: removed

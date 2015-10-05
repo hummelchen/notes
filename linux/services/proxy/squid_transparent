@@ -1,0 +1,15 @@
+acl localhost src 127.0.0.1
+acl localnet src 10.10.10.0/24
+acl Safe_ports port 80		# http
+acl CONNECT method CONNECT
+cache deny all
+http_access allow localhost
+http_access allow localnet
+http_access deny !Safe_ports
+http_access allow localhost
+http_access deny all
+http_port 10.10.10.1:3128 transparent
+forwarded_for delete
+coredump_dir /var/spool/squid3
+url_rewrite_program /usr/bin/squidGuard -c /etc/squidguard/squidGuard.conf
+

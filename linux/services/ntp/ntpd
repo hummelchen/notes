@@ -1,0 +1,19 @@
+UTC - дефолтное время в юниксе, отсчёт с 0:00:00 01.01.1970
+GMT == UTC
+/etc/localtime - смена часового пояса
+/usr/local/share/zoneinfo
+date
+	-s установить date -s 15:00
+/etc/ntp.conf
+server servername
+restrict default ignore - запрет доступа к серверу
+restrict 10.0.0.0 mask 255.0.0.0 nomodify notrap noquery
+##############################################
+	-b
+	-s
+/var/log/ntpstats/ - логи
+ntpq -p проверка запросов
+/etc/init.d/ntp start - запуск
+ntpdate 	#time.nist.gov ntp.ubuntu.com
+ntptrace
+hwclock - аппаратные часы

@@ -1,0 +1,36 @@
+xinetd - сетевой суперсервер
+	/etc/hosts.allow
+	/etc/hosts.deny
+/etc/inetd.conf
+	Сервис - имя сервиса по /etc/services
+	Тип соединения - stream, dgram, raw
+	Протокол - транспортный протокол
+	Флаги - nowait.connect_per_minutes - новая программа для каждого соединения, wait- программа сама обработает несколько соединений
+	Пользователь - пользователь, с правами которого будет запущен процесс
+	Программа
+	Аргументы
+	socket_type - тип соединения
+	protocol - протокол
+	server - полный путь к вызываемой программе
+	server_args - аргументы командной строки
+	port - порт
+	wait yes/no^
+	user - пользователь
+	group - группа
+	nice - nice программы
+	access_time - hh:mm-hh:mm
+	only_from - список машин или ip-адресов для подключения
+	no_access - запрет на доступ из этих мест
+	instances number\UNLIMITED - максимальное число запускаемых демонов
+	log_type SYSLOG средство\ FILE файл [нижний предел[:верхний предел]] - логи, сообщение после нижнего предела, конец лога после верхнего
+	redirect ip port - перенаправление
+	bind - сетевой интерфейс
+	log_on_failure PID HOST USERID EXIT DURATION
+	log_on_success ATTEMPT HOST USERID RECORD
+	disable - вкл/выкл службы
+	cps number waiting_minutes
+	max_load - максимальная загрузка для запрета на приём соединений
+        rlimit_as, rlimit_cpu, rlimit_data, rlimit_rss, rlimit_stack - лимиты сервера  
+	socket_type wait user  server  protocol - обязательные атрибуты
+
+

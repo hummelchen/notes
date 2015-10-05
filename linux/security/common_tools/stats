@@ -1,0 +1,5 @@
+htop
+dstat
+ccze - чтение логов
+lsof - кто использует файл
+fuser /

@@ -1,0 +1,10 @@
+/proc/cpuinfo - данные о процессоре
+/proc/mounts - данные о файловых системах
+mount -o(options)ro(readonly),loop(блочное устройство из файла)
+umount
+debugfs -R stats /dev/sdX
+lde -b block_number device
+/etc/fstab 
+block device - mount dir - fstype - mount options
+e2fsck - проверка и восстановление ФС
+tune2fs

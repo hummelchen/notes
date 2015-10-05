@@ -1,0 +1,52 @@
+История
+	MINIX - Linux - I386BSD
+	Message-ID: <1991Aug25.205708.9541@klaava.Helsinki.FI>	
+		comp.os.minix
+	Первый загрузчик - ядро, уже не влезает на дискету, возможность прямой загрузке запрещена
+		GRUB1/2 - great universal bootloader
+			(e)LILO - linux loader, efi
+		syslinux
+		PXELinux - старт по сети, preboot execution environment
+		ISOLinux - загрузка с DVD
+		uBoot
+	Разница между grub и lilo в том, что grub читает конф.файл, а lilo нужно пеpесобрать		
+Ядро 
+	Гибридное - часть функциональности можно подгружать и выгружать
+		/lib/modules/name/kernel/*
+	Загрузка ядра:
+		bootstrapping
+		Параметр ROOT - корневая ФС
+		crashkernel - вторая копия ядра
+		quiet - не писать ничего, кроме ошибок
+		splash  
+		fork - проблема курицы и яйца, init
+		Ядро создаёт один процесс
+		Варианты init:
+			BSD-стиль
+				/etc/rc && /etc/rc.d && /etc/rc.local
+			SysV-стиль
+				sysvinit /etc/inittab && /etc/rc[0-9].d && /etc/rc.local
+			upstart /etc/init/*.conf
+			systemd /etc/system.conf && /etc/user.conf
+		Файловые системы:
+			Начальный ramdisk, загружается в память вместе с ядром,	 			initrd, initramfs, проблема курицы и яйца, модуль для работы с диском	
+mkinitrd
+mkinitramfs
+dkms
+lilo не умеет в работу с фс, только положение файлов в бутсекторе
+MBR(grub1) (зазор в 63 сектора, grub1.5, умеет в fs и lvm)-> grub_stage2
+перемещение
+/etc/dkms
+linux/Documentation/x86/boot.txt
+man 5 fstab
+\\lsmod
+\\file	/usr/share.file/magic
+\\hexdump -C -n512 /boot/vm*
+\\uuidgen
+\\tune2fs -l /dev/sdaX - распечатка содержимого суперблока
+/proc/cmdline
+\\sysctl -p перечитать конфигурационный файл \\sysctl -w
+//kernel.panic = \\3 секунды
+\\blkid
+\\dpkg -S /sbin/init 
+\\zcat

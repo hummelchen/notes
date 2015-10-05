@@ -1,0 +1,32 @@
+Активный и пассивный режимы работы сервера
+Управляющее соединение и соединение данных
+20, 21
+Отсутствие шифрования данных
+/etc/proftpd.conf
+	Пользователь(анонимный) ftp шелл /bin/false
+	Basic anonymous configuration
+	DefaultRoot ~ - дефолтная корневая директорию
+/etc/proftpd/tls.conf
+	TLSEngine on - включить tls
+	TLSLog /path - лог TLS
+	TLSProtocol SSLv23 - протокол TLS
+	TLSRSACertificateFile /file
+	TLSRSACertificateKeyFile /file
+	TLSOptinos - опции
+		NoCertRequest - без верификации клиента
+		AllowClientRenegotiantion - передоговоры о сертификатах
+	TLSVerifyClient off - верификация клиентов
+	TLSRequired on - обязательное шифрование
+ftp-ssl
+	ftp команды
+	help                  получить список команд поддерживаемых ftp-сервером
+	ls или dir            список файлов или директорий
+	pwd                   показать текущую директорию
+	cd                    перейти к указанной директории
+	mkdir                 создать директорию
+	rmdir                 удалить директорию, если она не пустая
+	[m]get                получить файл[ы] с сервера
+	[m]put                отправить файл[ы] на сервер
+	TYPE {binary | ascii} указать режим передачи данных
+	quit или exit         завершить работу с сервером
+

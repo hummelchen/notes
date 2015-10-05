@@ -1,0 +1,54 @@
+#!/bin/sh
+INSPECT_DIR=/tmp 
+SENDMAIL="/usr/sbin/sendmail -i"
+VIRUSADMIN="info@company.ru" 
+EX_TEMPFAIL=75
+EX_UNAVAILABLE=69
+FILTER_SPAMC="/usr/bin/spamc -u spamfilter -U /var/run/spamd.sock"
+trap "rm -f $INSPECT_DIR/in.$$ $INSPECT_DIR/vr.$$ $INSPECT_DIR/vr1.$$" 0 1 2 3 15
+cat | $FILTER_SPAMC > $INSPECT_DIR/in.$$ || { echo Cannot save mail to file; exit
+$EX_TEMPFAIL; }
+/usr/bin/clamscan -v -r --no-summary --stdout ${INSPECT_DIR}/in.$$>$INSPECT_DIR/vr.$$
+AV_RESULT=$?
+case "$AV_RESULT" in
+0)
+$SENDMAIL "$@" <${INSPECT_DIR}/in.$$
+exit 0
+;;
+1)
+echo "Subject: VIRUS FOUND" >> $INSPECT_DIR/vr1.$$
+echo >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+echo "* MAIL
+*" >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+echo >> $INSPECT_DIR/vr1.$$
+grep Received $INSPECT_DIR/in.$$ >> $INSPECT_DIR/vr1.$$
+echo "Mail from: $2 (may be forget)" >> $INSPECT_DIR/vr1.$$
+echo "To: $4" >> $INSPECT_DIR/vr1.$$
+grep Subject $INSPECT_DIR/in.$$ >> $INSPECT_DIR/vr1.$$
+echo >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+echo "* Virus(es)
+*" >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+# Включаем в отчет список вирусов
+cat $INSPECT_DIR/vr.$$ >> $INSPECT_DIR/vr1.$$
+$SENDMAIL -f $VIRUSADMIN -r $VIRUSADMIN -F "Antivirus" $VIRUSADMIN < $INSPECT_DIR/vr1.$$
+exit 0
+;;
+*)
+echo "Subject: ANTIVIRUS FAILED" >> $INSPECT_DIR/vr1.$$
+echo >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+echo "* Antivirus Failed with next problem
+*" >> $INSPECT_DIR/vr1.$$
+echo "************************************************" >> $INSPECT_DIR/vr1.$$
+$SENDMAIL -f $VIRADMIN -r $VIRADMIN -F "Antivirus" "$VIRADMIN" < $INSPECT_DIR/vr1.$$
+exit $EX_TEMPFAIL
+;;
+esac
+exit 0
+
+
+

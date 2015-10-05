@@ -1,0 +1,7 @@
+openssl req 
+	-new -x509 
+	-days 365(срок дейcтви) 
+	-nodes(без шифрования секретного ключа) 
+	-out
+		/file.cert.pem -keyout \
+		/file.key.pem

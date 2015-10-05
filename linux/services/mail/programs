@@ -1,0 +1,7 @@
+mailq - очередь писем
+postfix flush - работа с очередью
+postsuper -d ID удалить письмо
+postconf
+postmap file - создать базу данных 
+postalias file - смена алиасов
+man 5 program

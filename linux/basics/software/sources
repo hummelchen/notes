@@ -1,0 +1,7 @@
+./configure
+CFLAGS="-march=native -pipe -02 -mfpmath=sse"
+Makefile - управляющий файл
+make
+	install
+	uninstall
+	-j2 - количество потоков

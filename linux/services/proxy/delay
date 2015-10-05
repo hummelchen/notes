@@ -1,0 +1,9 @@
+acl ok dstdomain .odnoklassniki.ru
+acl vk dstdomain .vkontakte.ru
+delay_pools 7
+delay_class 1 1
+delay_class 2 2
+delay_parameters 1 400/400
+delay_parameters 2 4000/4000 400/400
+delay_access 1 allow vk
+delay_access 1 deny all

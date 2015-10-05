@@ -1,0 +1,8 @@
+sudo apt-get install postfix postfix-mysql postfix-doc mysql-client mysql-server dovecot-common dovecot-imapd dovecot-pop3d libsasl2-2 libsasl2-modules libsasl2-modules-sql sasl2-bin libpam-mysql openssl telnet mailutils
+postconf -m
+useradd -r -u 1001 -g mail -d /var/vmail -s /usr/sbin/nologin -c "Virtual Mailbox" vmail
+mkdir /var/vmail
+chmod 770 /var/vmail/
+chown vmail: /var/vmail/
+mkdir /etc/postfix/sql
+

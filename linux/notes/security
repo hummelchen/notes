@@ -1,0 +1,77 @@
+Безопасность
+  Безопасность — такое состояние сложной системы, когда действие внешних и внутренних факторов не приводит к ухудшению системы или к невозможности еѐ функционирования и развития.
+Защита информации и информационных систем от
+  угроз:
+   – неправомерные доступ и использование
+   – раскрытие
+   – сбой
+   – ознакомление
+   – исследование
+   – запись/копирование
+   – уничтожение
+RFC2196 Site Security Handbook
+ISECOM OSSTMM
+Institute for Security and Open Methodologies
+Open Source Security Testing Methodology Manual
+Безопасность — функция разделения.
+Разделение между объектом (asset) и угрозой или существует или нет.
+   4 активных способа разделения:
+	Переместить объект для создания физического или логического барьера между ним и угрозой.
+	Изменить угрозу до безвредного состояния.
+	Уничтожить угрозу.
+	Уничтожить объект, ня!
+Stack overflow
+AAA
+	Authentication - проверка подлинности (желательно, многофакторная)
+	Authorization - разрешение или запрет на выполнение операции 
+	Accounting - учет
+Протоколы AAA
+	RADIUS / DIAMETER remote access user service / dial-in ...
+	TACACS / TACACS+ - протокол CISCO, используется для тех же целей, в том числе и для учёта
+	хранение паролей в базе данных вместо /etc/passwd
+	name service switch
+Атрибуты ext2/3/4
+lsattr / chattr
+   – append only (a), compressed (c), no dump (d), extent
+     format (e), immutable (i), data journalling (j), secure
+     deletion (s), no tail-merging (t), undeletable (u), no
+     atime updates (A), synchronous directory updates (D),
+     synchronous updates (S), and top of directory hierarchy
+     (T)
+getfacl
+setfacl
+mount
+tune2fs
+tar - стандартные версии не сохраняют списки управления доступом
+dump /
+SE Linux
+	Патч для линукса, с мандатным управлением доступа
+ls -Z
+ps -Z 
+ls -Z ; ps -Z
+getenforce ; setenforce
+getsebool ; setsebool
+semanage //новые правила
+seinfo
+chcon
+restorecon //восстановление контекста
+capabilities - привелегии рута без полных прав
+	getcap
+	setcap
+/etc/sysconfig/selinux
+http://danwalsh.livejournal.com
+	ограничение доступа для сервисов
+Apparmor
+Мандатное управление доступом на основе правил
+Ограничения накладываются на процессы, контроль или сообщение о ошибках
+  – apparmor_status
+  – aa-complain /bin/ping
+  – aa-complain /etc/apparmor.d/*
+  – aa-enforce /bin/ping
+  – aa-enforce /etc/apparmor.d/*
+  – ln -s /etc/apparmor.d/bin.ping
+    /etc/apparmor.d/disable/
+  – apparmor_parser -r /etc/apparmor.d/bin.ping
+  – aa-logprof
+Kerberos - протокол аутентификации
+Взлом браузера - взлом им xserver-а - взлом машины

@@ -1,0 +1,62 @@
+apache - тяжелый в настройке, но универсальный
+apachectl configtest - проверка конфига
+	  graceful   - переконфигурация на лету
+	  status - статистика
+Виртуальный хостинг
+<VirtualHost *:80>
+ServerAdmin root@localhost
+DocumentRoot /var/www
+ServerName c1.u1.unix.specilaist.ru
+ErrorLog /var/log/apache/error_log
+CustomLog /var/log/apache/access_log common
+</VirtualHost>
+<VirtualHost *:80>
+ServerAdmin any@any.com
+DocumentRoot /home/any/public_html
+ServerName www.any.com
+ErrorLog /home/any/err/error_log
+CustomLog /home/any/err/access_log common
+</VirtualHost>
+
+apache2 -l - загруженные модули
+    prefork.c - каждый запрос обрабатывается своим процессом
+    worker - каждый запрос обрабатывается потоком
+ls -l /usr/lib/apache2/modules/ - модули
+ExtendedStatus - детальная статистика
+UseCanonicalName - не виртуальные хосты
+############################
+FollowSymLinks - даём возможность серверу работать с символическими ссылками
+<Files ~ "^.ht"
+    Order allow, deny
+    Deny from all 
+</Files> - запрет доступа к файлам, начинающимся с .ht
+MIMEMagicFile - проверка типа файла магией
+
+LogFormat - не переводить ip в имена, для этого есть спецпрограмма logresolv
+ErrorLog
+LogLevel  warning 
+Alias fakename "/realname/"
+ScriptAlias fakecginame "/realcginame/"
+IndexOptions
+AddIcons - выбор иконок
+IndexIgnore - выбор типов документов, не попадающих в индексинг
+AddLanguage - получение файла на разных языках // крайне редко используется
+LanguagePriority - 
+AddDefaultCharset -
+AddType - новый mime тип 
+AddHandler - обработчик для файлов определенного типа 
+AddOutputFilter - обработка страниц до отправки клиенту
+BrowserMatch - изменение поведения сервера в зависимости от ошибок веб-браузера
+Set-handler server-status
+Set-handler server-info
+Слеши в конце пути (для папок)
+Аутентификация
+htpasswd 
+ограничение по ip
+require user user1
+Order deny, allow
+Deny from all 
+Allow from 127.0.0.1
+SSL from mod_avalible to mod_enabled, настройки скопировать 
+apachectl configtest
+server side inclusions

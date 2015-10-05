@@ -1,0 +1,9 @@
+zone "test.loc" {
+        type master;
+        file "/etc/bind/test.loc.zone";
+};
+
+zone "0.168.192.in-addr.arpa" {
+        type master;
+        file "/etc/bind/0.168.192.in-addr.arpa.zone";
+};

@@ -1,0 +1,3 @@
+showmount -e host
+	-a user
+mount -r host:directory

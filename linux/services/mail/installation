@@ -1,0 +1,7 @@
+apt-get install whois postfix dovecot-pop3d
+ sudo apt-get install popa3d
+#реализуем виртуальный хостинг
+sudo apt-get install dovecot-pop3d
+aptitude install clamav-daemon clamav clamsmtp
+
+sudo freshclam

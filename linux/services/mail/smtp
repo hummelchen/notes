@@ -1,0 +1,30 @@
+user@debian:~$ nc localhost 25
+220 debian ESMTP Postfix (Debian/GNU)
+helo localhost
+250 debian
+mail from <root@localhost>
+501 5.5.4 Syntax: MAIL FROM:<address>
+mail from: <root@localhost>
+250 2.1.0 Ok
+rcpt to: <user@localhost>
+250 2.1.5 Ok
+data
+354 End data with <CR><LF>.<CR><LF>
+test
+.
+250 2.0.0 Ok: queued as 0A02FC3021
+quit
+221 2.0.0 Bye
+
+grep 0A02FC3021 /var/log/mail.log
+
+каждый промежуточный узел добавляет свой "штампик"
+заголовок фром по стандарту не ограничивается, но обычно не более 32 кб
+
+агент подачи почты подаёт письма серверу приведенном к каноническому виду
+
+mx-запись, из хостнейма почтового сервера, нужно для маршрутизации почты
+Транспортный агент знает, какие домены обслуживает
+
+OPEN RELAY - отправка почты куда угодно, быстро заспамливается
+Почта только для своих доменов

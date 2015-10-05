@@ -1,0 +1,16 @@
+squid3 -k signal
+	reconfigure
+	rotate - ротировать журнал
+	debug - отладочная информация
+	check - проверка работающего конфига
+	parse - проверка файлов конфига
+	
+	-z - создать папки свопа
+Может работать как обычный, анонимный и прозрачный прокси-сервер
+Куча способов аутентификации
+Обрабатывает только запросы из внутренней сети
+Прозрачный прокси - все запросы обрабатываются прозрачно
+Web-interface apt-get install libpcre3 libpcre3-dev libmysqlclient15-dev php5-ldap php-fpdf squid squidguard gcc make php5-gd
+http://sams.perm.ru/new/index.php?option=com_phocadownload&view=category&id=1:sams-1-x&Itemid=128
+
+Готовая конфигурация с squidguard запилена

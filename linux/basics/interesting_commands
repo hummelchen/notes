@@ -1,0 +1,9 @@
+dd if=/dev/dsp | ssh -C user@host dd of=/dev/dsp
+mount -t tmpfs -o size=1024m tmpfs /mnt
+python -m SimpleHTTPServer
+:w !sudo tee %
+mtr google.com
+ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg
+http://rus-linux.net/lib.php?name=/MyLDP/index#index1
+find * -exec cat {} \;  | grep http | grep -shoP 'http.*?[" >]' > ..outfilename
+chvt 7;sleep 10;import -display :0.0 -window root image.png # screenshot

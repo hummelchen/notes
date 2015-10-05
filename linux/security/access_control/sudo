@@ -1,0 +1,6 @@
+/etc/sudoers
+visudo
+имя пользователя имя_хоста = команда(полный путь, через запятую)
+Алиасы:
+Cmnd_Alias  networking = /command1, /command2; ALL
+user host = (user1) NOPASSWD: commands

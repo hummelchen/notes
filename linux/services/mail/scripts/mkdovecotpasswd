@@ -1,0 +1,2 @@
+mkpasswd --hash=md5 $2 > /tmp/hash
+echo "$1:`cat /tmp/hash`" >> /etc/dovecot/passwd

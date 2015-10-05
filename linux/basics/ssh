@@ -1,0 +1,9 @@
+sshfs user@host:/path/to/file /media/mountpoint -o reconnect
+ssh user@192.168.0.3 -f -N  -D 6666
+ssh -XYX user@192.168.0.3
+scp SourceFile user@host:directory/TargetFile
+scp user@host:directory/SourceFile TargetFile
+proxychains vncviewer 192.168.0.3:0  
+sudo sshuttle --dns -vvr username@server 0/0
+http://habrahabr.ru/post/181320/
+sudo ./sshuttle --dns -vr home 192.168.0.0/24

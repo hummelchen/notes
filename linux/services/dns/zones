@@ -1,0 +1,6 @@
+CNAME - canonical name
+mail CNAME c0
+c0 A ip
+Два запроса - два ответа, alias
+$GENERATE A-B
+

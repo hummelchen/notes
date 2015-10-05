@@ -1,0 +1,9 @@
+df -h -t (ext4) -t (ext3) (PATH): тип файловой системы
+df (path) выдаёт информацию о ФС, в которой находится папка
+du - disk usage
+du (path) -s : суммарная, -h - human-readable
+mount
+dd if=(input file) of=(output file) bs=(SIZE)- block size count=(NUMBER)-количество блоков seek skip
+parted - 
+fillfile number letter
+lsdel | debugfs /dev/hdc3 > > lsdel.out

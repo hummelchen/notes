@@ -1,0 +1,7 @@
+Блокирование
+	http_Access allow|deny [!]acl and
+		!  - отрицание
+	Срабатывает только одно правило!
+	http_access allow rule0 rule1
+	http_access deny all
+	

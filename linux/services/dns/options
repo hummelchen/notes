@@ -1,0 +1,7 @@
+recursion yes|no рекурсивность сервера
+allow-recursion { address } - машины, для которых сервер будет рекурсивным
+listen-on port 0000 { ip } - интерфейс, на котором dns слушает свой интерфейс
+listen-on-v6 00 { ipv6 } - тоже самое, но для v6
+allow-transfer { ip } - кто может получать от нас зоны.
+allow-query { ip } - вайт-лист приёма запросов
+blackhole { ip } - блеклист приёма запросов

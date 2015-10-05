@@ -1,0 +1,6 @@
+auth_param basic program /usr/lib/ncsa_auth /etc/squid/passwd программа, спрашивающая пароль
+auth_param basic children 5 - количество дочерних процессов
+auth_param basic realm Squid proxy-caching web server - область, название сервера
+auth_param basic credentialsttl 2 hours - время действия аутентификации, после закрытия браузера будет новая аутентификация
+htpasswd -cd /etc/squid/passwd user
+Нужно использовать системную функцию crypt, иначе segfault

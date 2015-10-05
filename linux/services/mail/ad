@@ -1,0 +1,44 @@
+агенты доступа
+pop3
+lsof -i TCP:110
+
+nc localhost 110
++OK
+USER user
++OK
+PASS 1
+-ERR Authentication failed (bad password?)
+root@debian:/home/user# nc localhost 110
++OK
+USER user
++OK
+PASS 123456
++OK
+list
++OK
+1 554
+.
+retr 1
++OK
+Return-Path: <user@company.ru>
+X-Original-To: root
+Delivered-To: root@company.ru
+Received: by debian (Postfix, from userid 1000)
+	id B240CC34BC; Sun, 15 Mar 2015 07:31:28 -0400 (EDT)
+To: root@company.ru
+From: user@company.ru
+Auto-Submitted: auto-generated
+Subject: *** SECURITY information for debian ***
+Message-Id: <20150315113128.B240CC34BC@debian>
+Date: Sun, 15 Mar 2015 07:31:28 -0400 (EDT)
+
+debian : Mar 15 07:31:28 : user : user NOT in sudoers ; TTY=pts/1 ; PWD=/home/user ; USER=root ; COMMAND=/bin/grep 0A02FC3021 /var/log/mail.log
+.
+dele 1
++OK
+quit
++OK
+
+
+POP3 - забрали и на сервере ничего не осталось
+

@@ -1,0 +1,11 @@
+$TTL 30
+$ORIGIN test.loc.
+@       SOA c0 root 2013092200 1h 10m 1d 30
+        NS  c0
+c0              A       192.168.0.254
+blizzard        A       192.168.0.1
+typhoon         A       192.168.0.2
+hurricaine      A       192.168.0.2
+hurricaine      A       192.168.0.3
+snowfall        A       192.168.0.3
+

@@ -1,0 +1,6 @@
+tcpdump - сетевой анализатор
+	-i интерфейс "ether host mac-адрес"
+	-ttt 'ip proto \icmp'
+	dst port
+	-w file писать файл
+	

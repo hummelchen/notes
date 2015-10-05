@@ -1,0 +1,178 @@
+Модель ISO\OSI
+	Стандартизация
+	ISO - international standartisation organisation
+	Семиуровневая модель
+		All        (7) Application  //прикладной
+		People     (6) Presentation //представления
+		Seem       (5) Session   //установка соединения
+		To         (4) Transport //доставка данных
+		Need       (3) Network   //адресация
+		Data       (2) Data Link Control //отвечает за совместную работу устройств на интерфейсе данного уровня mac-адрес, media access control
+		Processing (1) Physical interface //физическое взаимодействие плат и их интерфейсов
+			Устройство n-го уровня
+Сети с коммутацией
+	пакетов
+		каждый пакет доставляется независимо от остальных
+	каналов
+		телефонная связь, конкретная линия связи
+Ethernet
+	набор стандартов, описыващий кодирование сигналов и разные способы представления информации о мак-адресе
+	LLC - logic link control в основном не используется для ethernet сетей, есть поддержка в линуксе
+	6 байт адрес получателя, 6 - отправителя, поле, означающее тип связи
+TCP/IP
+ Application               Telnet, FTP, mail, ...
+ Transport                 TCP, UDP
+ Network                   IP, ICMP, IGMP - групповая трансляция
+ Link                      Драйверы, сетевые платы
+Transmission Control Protocol
+	TCP handshake
+		syn -> syn-ack -> ack
+	Оптимизации
+		BDP - bendvife delay product для задействования всей пропускной последовательности канала нужно заполнить его данными, увеличение размера окна до размера данных, помещающихся в канале, более 64Кб
+		SACK - selective acknolegement какие куски не дошли
+		TCP timestamp - время доставки
+		Path mtu discovery
+User Datagram Protocol
+Internet Protocol
+Инкапсуляция и абстрагированность
+Заголовок и хвост с контрольной суммой
+MTU - 1500 bytes, jumbo frame до 9000 bytes
+MSS - maximum segment size, TCP\IP
+	В IPv6 запрещена фрагментация пакетов
+		Минимальный MTU 576 bytes 
+		Заголовки: Ethernet-14, IP-20, TCP-4, Ethernet - 4 bytes
+Широковещательный адрес для IP
+	192.168.0.0 - 192.168.0.255
+Для mac:
+	00.05.11.22.FF
+	FF.FF.FF.FF.FF
+Token ring
+	редкие коллизии, развитие ограничилось на 4 Mbit
+Документация: 
+платные и бесплатные стандарты
+	RFC - request for comments
+	STD
+Средства настройки
+	ethtool / mii-tool // конфигурирование первого и второго уровня
+	ifconfig / ip // конфигурирование третьего уровня
+		ip link dev show eth0
+		метрика интерфейса
+			интерфейс с несколькимии ip-адресами
+			указывается при маршрутизации
+	netstat
+		указывает и локальные сокеты
+		for udp -ua
+	iptables
+		Диагностика
+			mtr / tracepath / traceroute / tcptraceroute - трассировка
+				TTL - time to live, число маршрутизаторов, при 0 возврат пакета
+			nc / telnet
+				через nc можно передавать файлы
+			nmap
+			tcpdump / tshark
+				-s 0 читать всё
+				tshark читает не только заголовки
+			wireshark
+	IPv6
+		Много адресов
+  		– 128-разрядные адреса
+  		– иерархическая адресация
+		Дополнительные заголовки
+  		– необязательны
+  		– инкапсулируются
+		Автоматическая настройка
+ 		– link-local сетевой интерфейс может придумать себе уникальный ipv6 адрес, иб, функция, параметр
+  		– RADV - демон анонсов маршрутизаторов
+  		– DHCPv6 - спецпротокол
+			ip -6
+			ping6
+			traceroute6 / tracepath6
+			host -t AAAA www.yandex.ru
+DNS
+	Появился в 1983 году
+	TLD - top level domain
+	13 корневых серверов
+		только нерекурсивные запросы
+	nslookup - windows
+	Двоичные (не текстовые) запросы
+	  – рекурсивные
+	  – итеративные (нерекурсивные)
+	Ответы
+	  – Авторитативные //ответ получен от сервера-владельца этой зоны
+	  – Кешированные //ранее был получен ответ, невыполнение поиска
+Записи 
+Типы         Классы
+ – A / AAAA   IN
+ – PTR        HS
+ – SRV //есть ли у нас какая-либо служба name SRV number
+ – TXT //сохранение текста в зоне, hesiod,
+Эталонная реализация bind
+FTP
+	USER
+	PASS mail
+	LIST
+	PORT PASV
+		ответное соединение от сервера или пассивное поведение адреса
+	RETR
+	lftp / ncftp / ftp
+	альтернатива — sftp / scp / FTPS
+HTTP
+	GET / HTTP/1.1 /POST
+	Host: host //виртуальные хосты, различаются по именам
+	User-agent:
+	lynx/links/
+	elinks - https, unicode utf-8
+	w3m - аналогично, цвет
+	wget / lftp / GET / HEAD
+	cadaver //консольный клиент, умеет в webdove
+Email
+	Пользовательский агент
+	Транспортный агент
+	Программа подачи почты
+	Программа получения почты
+	Доставочный агент
+	MUA: Mail User Agent
+	MTA: Mail Transfer Agent
+	MSP: Mail Submission Program
+	MRA: Mail Retrieval Agent
+	MDA: Mail Delivery Agent
+MUA
+	mailx — аналог первого MUA mail
+	mutt — лучший консольный MUA
+	alpine — клон pine, бывшего лучшего
+	Evolution — аналог Outlook
+	Thunderbird — «Firefox» для почты
+Транспортные агенты	
+	Sendmail - древний
+	POSTFIX - лучший
+	Exim - с правильной лицензией
+MSP — подача почты, часть MTA
+MRA — получение почты: fetchmail
+MDA — доставка почты: procmail
+SMTP
+	HALO
+	HELO
+	EHLO
+	MAIL FROM: <>
+	RCPT TO: <>
+	DATA
+	.
+	QUIT
+POP3
+	USER
+	PASS
+	LIST
+	DELE
+	QUIT
+IMAP
+	– LOGIN
+	– LIST
+	– SELECT
+	– CREATE
+	– DELETE
+	– RENAME
+	– SUBSCRIBE
+	– LOGOUT
+SSL\TSL
+	openssl s_client -quite -connect
+
