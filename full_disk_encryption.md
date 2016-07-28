@@ -277,7 +277,7 @@ C `/dev/mapper/rootfs` далее можно работать как с обыч
 
 
         cp /root/initrd /mnt/cryptboot/initrd
-        cp /mnt/rootfs/boot/vmlinuz-(вставьте сюда свою версию) /mnt/cryptboot/vmlinuz
+        cp /mnt/rootfs/boot/vmlinuz-`uname -r` /mnt/cryptboot/vmlinuz
         sync
 
 
